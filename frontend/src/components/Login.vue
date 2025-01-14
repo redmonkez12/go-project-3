@@ -7,20 +7,20 @@
 
         <form-tag name="myform" event="myevent" @myevent="submitHandler">
           <text-input
-            v-model="email"
-            label="Email"
-            type="email"
-            name="email"
-            required="true"
-          />
+              v-model="email"
+              label="Email"
+              type="email"
+              name="email"
+              required="true">
+          </text-input>
 
           <text-input
-            v-model="password"
-            label="Password"
-            type="password"
-            name="password"
-            required="true"
-          />
+              v-model="password"
+              label="Password"
+              type="password"
+              name="password"
+              required="true">
+          </text-input>
 
           <hr />
           <button class="btn btn-primary" type="submit">Login</button>
@@ -31,25 +31,45 @@
 </template>
 
 <script>
-import FormTag from "./forms/FormTag.vue";
-import TextInput from "./forms/TextInput.vue";
+import FormTag from './forms/FormTag.vue'
+import TextInput from './forms/TextInput.vue'
 
 export default {
-  name: "login",
-  data() {
-    return {
-      email: "",
-      password: "",
-    };
-  },
-  methods: {
-    submitHandler() {
-      console.log("Submit handler called");
+    name: 'login',
+    components: {
+        FormTag,
+        TextInput,
     },
-  },
-  components: {
-    TextInput,
-    FormTag,
-  },
-};
+    data() {
+        return {
+            email: "",
+            password: "",
+        }
+    },
+    methods: {
+        submitHandler() {
+            console.log("submitHandler called - success!");
+
+            const payload = {
+                email: this.email,
+                password: this.password,
+            }
+
+            const requestOptions = {
+                method: "POST",
+                body: JSON.stringify(payload),
+            }
+
+            fetch("http://localhost:4000/users/login", requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.error) {
+                    console.log("Error:", data.message);
+                } else {
+                    console.log(data);
+                }
+            })
+        }
+    }
+}
 </script>

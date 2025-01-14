@@ -5,28 +5,28 @@
       :type="type"
       :name="name"
       :placeholder="placeholder"
-      class="form-control"
       :required="required"
       :min="min"
       :max="max"
       :value="value"
       :autocomplete="name + '-new'"
+      class="form-control"
     />
   </div>
 </template>
 
 <script>
 export default {
-    name: 'TextInput',
-    props: {
-        name: String,
-        type: String,
-        label: String,
-        placeholder: String,
-        required: String,
-        min: String,
-        max: String,
-        value: String,
-    },
-}
+  name: "TextInput",
+  props: {
+    name: String,
+    type: String,
+    label: String,
+    placeholder: String,
+    required: String,
+    min: String,
+    max: String,
+    value: String,
+  },
+};
 </script>
